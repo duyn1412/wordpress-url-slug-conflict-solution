@@ -1,35 +1,35 @@
-# Xử Lý Xung Đột URL Cho CPT và Taxonomy Có Cùng Slug
+# WordPress URL Slug Conflict Resolution
 
-## Vấn Đề
-Khi custom post type và custom taxonomy có cùng slug, WordPress sẽ chỉ nhận diện được một trong hai và cái còn lại sẽ trả về 404.
+## Problem
+When custom post type and custom taxonomy have the same slug, WordPress will only recognize one of them and the other will return 404.
 
-## Giải Pháp
-Code trong `functions.php` sẽ tự động xử lý xung đột này bằng cách:
+## Solution
+The code in `functions.php` will automatically handle this conflict by:
 
-1. **Hook vào parse_query**: Can thiệp vào quá trình xử lý query của WordPress
-2. **Phân biệt URL**: Dựa trên segment thứ 2 để xác định là post hay taxonomy
-3. **Xử lý query**: Set đúng query variables để WordPress hiển thị đúng content
+1. **Hook into parse_query**: Intercept WordPress query processing
+2. **URL Detection**: Based on the second segment to determine if it's a post or taxonomy
+3. **Query Processing**: Set correct query variables for WordPress to display the right content
 
-## Cách Hoạt Động
+## How It Works
 
 ### URL Structure
-- `/campaign/` → Archive page (tất cả campaigns)
+- `/campaign/` → Archive page (all campaigns)
 - `/campaign/post-name/` → Single campaign post
 - `/campaign/category-name/` → Campaign category archive
 
-### Logic Phân Biệt
-1. **Kiểm tra post trước**: Tìm xem có post nào có slug = `post-name` không
-2. **Nếu tìm thấy post**: Set query để hiển thị single post
-3. **Nếu không tìm thấy post**: Tìm taxonomy term có slug = `category-name`
-4. **Nếu tìm thấy term**: Set query để hiển thị taxonomy archive
-5. **Nếu không tìm thấy gì**: Trả về 404
+### Detection Logic
+1. **Check post first**: Look for any post with slug = `post-name`
+2. **If post found**: Set query to display single post
+3. **If no post found**: Look for taxonomy term with slug = `category-name`
+4. **If term found**: Set query to display taxonomy archive
+5. **If nothing found**: Return 404
 
-## Yêu Cầu
+## Requirements
 - CPT: `ta_campaign` (slug: `campaign`)
 - Taxonomy: `ta-campaign-category` (slug: `campaign`)
 
-## Lưu Ý
-- Code sẽ tự động chạy khi có xung đột slug
-- Không cần cấu hình thêm
-- Tương thích với tất cả themes
-- Hoạt động với CPT và taxonomy được đăng ký bằng ACF
+## Notes
+- Code will automatically run when there's a slug conflict
+- No additional configuration needed
+- Compatible with all themes
+- Works with CPT and taxonomy registered by ACF

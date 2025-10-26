@@ -214,5 +214,5 @@ This solution can be replicated for similar conflicts in the future by following
 
 **Document Version**: 1.0  
 **Last Updated**: December 2024  
-**Author**: Development Team  
+**Author**: Duy Nguyen - WordPress Expert  
 **Status**: Implemented and Tested
